@@ -1,0 +1,2 @@
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.0")
+addSbtPlugin("no.arktekk.sbt" % "aether-deploy" % "0.17")

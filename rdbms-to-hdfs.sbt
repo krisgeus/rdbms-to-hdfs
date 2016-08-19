@@ -14,15 +14,27 @@ resolvers ++= Seq(
 )
  
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % sparkVersion,
-  "org.apache.spark" %% "spark-sql" % sparkVersion,
-  "org.apache.spark" %% "spark-hive" % sparkVersion,
+  "org.apache.spark" %% "spark-core" % sparkVersion excludeAll(
+    ExclusionRule(organization = "javax.servlet")
+  ),
+  "org.apache.spark" %% "spark-sql" % sparkVersion excludeAll(
+    ExclusionRule(organization = "javax.servlet")
+  ),
+  "org.apache.spark" %% "spark-hive" % sparkVersion excludeAll(
+    ExclusionRule(organization = "javax.servlet")
+    ),
+  "org.apache.spark" %% "spark-mllib" % sparkVersion excludeAll(
+    ExclusionRule(organization = "javax.servlet")
+    ),
   "com.typesafe" % "config" % "1.2.1",
   "com.holdenkarau" %% "spark-testing-base" % sparkTestingVersion % Test excludeAll(
     ExclusionRule(organization = "org.apache.hadoop"),
-    ExclusionRule(organization = "org.xerial.snappy", name="snappy-java")
+    ExclusionRule(organization = "org.xerial.snappy", name="snappy-java"),
+    ExclusionRule(organization = "javax.servlet")
   ),
-  "org.apache.hadoop" % "hadoop-minicluster" % hadoopVersion % Test,
+  "org.apache.hadoop" % "hadoop-minicluster" % hadoopVersion % Test excludeAll(
+    ExclusionRule(organization = "javax.servlet")
+  ),
   "org.xerial.snappy" % "snappy-java" % "1.0.5" % Test
 )
  

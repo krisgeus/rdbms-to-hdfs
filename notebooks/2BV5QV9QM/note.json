@@ -1,0 +1,240 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nthe %dep zeppelin dependency management is deprecated and doesn\u0027t work with the %sql cells.\n\n```\n%dep\nz.reset()\nz.load(\"mysql:mysql-connector-java:6.0.3\")\n```\n\nTherefor I added the mysql connector as a dependency in the interperter menu.\n",
+      "dateUpdated": "Aug 19, 2016 10:52:40 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/markdown"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471594618901_936576809",
+      "id": "20160819-101658_160539401",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003ethe %dep zeppelin dependency management is deprecated and doesn\u0027t work with the %sql cells.\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e%dep\nz.reset()\nz.load(\"mysql:mysql-connector-java:6.0.3\")\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eTherefor I added the mysql connector as a dependency in the interperter menu.\u003c/p\u003e\n"
+      },
+      "dateCreated": "Aug 19, 2016 10:16:58 AM",
+      "dateStarted": "Aug 19, 2016 10:52:40 AM",
+      "dateFinished": "Aug 19, 2016 10:52:40 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val db_user \u003d \"sourcedb\"\nval db_pwd \u003d \"sourcedb\"\n \nval jdbc_url \u003d s\"jdbc:mysql://localhost:3306/employees?user\u003d${db_user}\u0026password\u003d${db_pwd}\"\nval db_driver \u003d \"com.mysql.jdbc.Driver\"\n \ndef getTableAsDataframe(tablename: String) \u003d {\n  sqlContext.read.format(\"jdbc\").options(Map(\"url\"-\u003ejdbc_url, \"dbtable\"-\u003es\"${tablename}\", \"driver\"-\u003edb_driver)).load()\n}\n \nval employeeDF \u003d getTableAsDataframe(\"employees\")\nemployeeDF.show(2)",
+      "dateUpdated": "Aug 19, 2016 10:47:25 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471593744217_-525341484",
+      "id": "20160819-100224_211686267",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "db_user: String \u003d sourcedb\ndb_pwd: String \u003d sourcedb\njdbc_url: String \u003d jdbc:mysql://localhost:3306/employees?user\u003dsourcedb\u0026password\u003dsourcedb\ndb_driver: String \u003d com.mysql.jdbc.Driver\ngetTableAsDataframe: (tablename: String)org.apache.spark.sql.DataFrame\njava.sql.SQLException: The server time zone value \u0027CEST\u0027 is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.\n\tat com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:695)\n\tat com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:663)\n\tat com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:653)\n\tat com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:638)\n\tat com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:606)\n\tat com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:624)\n\tat com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:620)\n\tat com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:69)\n\tat com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:1663)\n\tat com.mysql.cj.jdbc.ConnectionImpl.\u003cinit\u003e(ConnectionImpl.java:662)\n\tat com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:352)\n\tat com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:221)\n\tat org.apache.spark.sql.execution.datasources.jdbc.DriverWrapper.connect(DriverWrapper.scala:45)\n\tat org.apache.spark.sql.execution.datasources.jdbc.JdbcUtils$$anonfun$createConnectionFactory$2.apply(JdbcUtils.scala:61)\n\tat org.apache.spark.sql.execution.datasources.jdbc.JdbcUtils$$anonfun$createConnectionFactory$2.apply(JdbcUtils.scala:52)\n\tat org.apache.spark.sql.execution.datasources.jdbc.JDBCRDD$.resolveTable(JDBCRDD.scala:120)\n\tat org.apache.spark.sql.execution.datasources.jdbc.JDBCRelation.\u003cinit\u003e(JDBCRelation.scala:91)\n\tat org.apache.spark.sql.execution.datasources.jdbc.DefaultSource.createRelation(DefaultSource.scala:57)\n\tat org.apache.spark.sql.execution.datasources.ResolvedDataSource$.apply(ResolvedDataSource.scala:158)\n\tat org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:119)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.getTableAsDataframe(\u003cconsole\u003e:36)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:37)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:42)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:44)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:46)\n\tat $iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:48)\n\tat $iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:50)\n\tat $iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:52)\n\tat $iwC.\u003cinit\u003e(\u003cconsole\u003e:54)\n\tat \u003cinit\u003e(\u003cconsole\u003e:56)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:60)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:7)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat $print(\u003cconsole\u003e)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:483)\n\tat org.apache.spark.repl.SparkIMain$ReadEvalPrint.call(SparkIMain.scala:1045)\n\tat org.apache.spark.repl.SparkIMain$Request.loadAndRun(SparkIMain.scala:1326)\n\tat org.apache.spark.repl.SparkIMain.loadAndRunReq$1(SparkIMain.scala:821)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:852)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:800)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpretInput(SparkInterpreter.java:810)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:753)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:746)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:341)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\nCaused by: com.mysql.cj.core.exceptions.InvalidConnectionAttributeException: The server time zone value \u0027CEST\u0027 is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:408)\n\tat com.mysql.cj.core.exceptions.ExceptionFactory.createException(ExceptionFactory.java:54)\n\tat com.mysql.cj.core.exceptions.ExceptionFactory.createException(ExceptionFactory.java:73)\n\tat com.mysql.cj.jdbc.util.TimeUtil.getCanonicalTimezone(TimeUtil.java:118)\n\tat com.mysql.cj.mysqla.MysqlaSession.configureTimezone(MysqlaSession.java:315)\n\tat com.mysql.cj.jdbc.ConnectionImpl.initializePropsFromServer(ConnectionImpl.java:2446)\n\tat com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:1797)\n\tat com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:1653)\n\t... 49 more\n\n"
+      },
+      "dateCreated": "Aug 19, 2016 10:02:24 AM",
+      "dateStarted": "Aug 19, 2016 10:47:25 AM",
+      "dateFinished": "Aug 19, 2016 10:47:36 AM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nReading from mysql throws a Exception!! Bummer!\nGoogling for this I found:\n\nThis is a bug in mysql-connector-java from version 5.1.33 to 5.1.37. I\u0027ve reported it here: http://bugs.mysql.com/bug.php?id\u003d79343\nSeems it\u0027s still not fixed in the 6.0.3 version I use\n\nimplementing the \u0026serverTimezone\u003dUTC addition in the db url",
+      "dateUpdated": "Aug 19, 2016 10:47:41 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/markdown"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471594602903_-1201118728",
+      "id": "20160819-101642_490788954",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eReading from mysql throws a Exception!! Bummer!\n\u003cbr  /\u003eGoogling for this I found:\u003c/p\u003e\n\u003cp\u003eThis is a bug in mysql-connector-java from version 5.1.33 to 5.1.37. I\u0027ve reported it here: http://bugs.mysql.com/bug.php?id\u003d79343\n\u003cbr  /\u003eSeems it\u0027s still not fixed in the 6.0.3 version I use\u003c/p\u003e\n\u003cp\u003eimplementing the \u0026amp;serverTimezone\u003dUTC addition in the db url\u003c/p\u003e\n"
+      },
+      "dateCreated": "Aug 19, 2016 10:16:42 AM",
+      "dateStarted": "Aug 19, 2016 10:47:41 AM",
+      "dateFinished": "Aug 19, 2016 10:47:41 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val db_user \u003d \"sourcedb\"\nval db_pwd \u003d \"sourcedb\"\n \nval jdbc_url \u003d s\"jdbc:mysql://localhost:3306/employees?user\u003d${db_user}\u0026password\u003d${db_pwd}\u0026serverTimezone\u003dUTC\"\nval db_driver \u003d \"com.mysql.jdbc.Driver\"\n \ndef getTableAsDataframe(tablename: String) \u003d {\n  sqlContext.read.format(\"jdbc\").options(Map(\"url\"-\u003ejdbc_url, \"dbtable\"-\u003es\"${tablename}\", \"driver\"-\u003edb_driver)).load()\n}\n \nval employeeDF \u003d getTableAsDataframe(\"employees\")\nemployeeDF.show(2)",
+      "dateUpdated": "Aug 19, 2016 10:47:46 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471593798076_-351172826",
+      "id": "20160819-100318_1826680772",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "db_user: String \u003d sourcedb\ndb_pwd: String \u003d sourcedb\njdbc_url: String \u003d jdbc:mysql://localhost:3306/employees?user\u003dsourcedb\u0026password\u003dsourcedb\u0026serverTimezone\u003dUTC\ndb_driver: String \u003d com.mysql.jdbc.Driver\ngetTableAsDataframe: (tablename: String)org.apache.spark.sql.DataFrame\nemployeeDF: org.apache.spark.sql.DataFrame \u003d [emp_no: int, birth_date: date, first_name: string, last_name: string, gender: string, hire_date: date]\n+------+----------+----------+---------+------+----------+\n|emp_no|birth_date|first_name|last_name|gender| hire_date|\n+------+----------+----------+---------+------+----------+\n| 10001|1953-09-02|    Georgi|  Facello|     M|1986-06-26|\n| 10002|1964-06-02|   Bezalel|   Simmel|     F|1985-11-21|\n+------+----------+----------+---------+------+----------+\nonly showing top 2 rows\n\n"
+      },
+      "dateCreated": "Aug 19, 2016 10:03:18 AM",
+      "dateStarted": "Aug 19, 2016 10:47:46 AM",
+      "dateFinished": "Aug 19, 2016 10:47:48 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "employeeDF.registerTempTable(\"emp\")",
+      "dateUpdated": "Aug 19, 2016 10:47:51 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471596016781_1138529466",
+      "id": "20160819-104016_1437625796",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Aug 19, 2016 10:40:16 AM",
+      "dateStarted": "Aug 19, 2016 10:47:51 AM",
+      "dateFinished": "Aug 19, 2016 10:47:51 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql \n\nselect * from emp limit 5",
+      "dateUpdated": "Aug 19, 2016 10:47:54 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471596329576_-1768604219",
+      "id": "20160819-104529_1221156631",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "emp_no\tbirth_date\tfirst_name\tlast_name\tgender\thire_date\n10001\t1953-09-02\tGeorgi\tFacello\tM\t1986-06-26\n10002\t1964-06-02\tBezalel\tSimmel\tF\t1985-11-21\n10003\t1959-12-03\tParto\tBamford\tM\t1986-08-28\n10004\t1954-05-01\tChirstian\tKoblick\tM\t1986-12-01\n10005\t1955-01-21\tKyoichi\tMaliniak\tM\t1989-09-12\n"
+      },
+      "dateCreated": "Aug 19, 2016 10:45:29 AM",
+      "dateStarted": "Aug 19, 2016 10:47:54 AM",
+      "dateFinished": "Aug 19, 2016 10:47:55 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471596341463_-1901495831",
+      "id": "20160819-104541_274489656",
+      "dateCreated": "Aug 19, 2016 10:45:41 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/rdbms-to-hdfs/experiments",
+  "id": "2BV5QV9QM",
+  "angularObjects": {
+    "2BUBRP4H5:shared_process": [],
+    "2BT1N9QC9:shared_process": [],
+    "2BSJAWTVM:shared_process": [],
+    "2BRWTT97M:shared_process": [],
+    "2BV37P8R2:shared_process": [],
+    "2BUKP8T3M:shared_process": [],
+    "2BRMFBZHK:shared_process": [],
+    "2BU3CXAFV:shared_process": [],
+    "2BT396WCQ:shared_process": [],
+    "2BSC5BS9N:shared_process": [],
+    "2BTQUR5KT:shared_process": [],
+    "2BVAQPFZ8:shared_process": [],
+    "2BTDQN58K:shared_process": [],
+    "2BSQC5KWT:shared_process": [],
+    "2BSYTCVSF:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

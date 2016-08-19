@@ -59,3 +59,24 @@ grant all on employees.* to 'sourcedb'@'localhost';
 
 exit
 ```
+
+## Zeppelin notebook for exploration
+
+In the notebooks directory we have a zeppelin notebook with the experimentation code
+
+The following settings are needed to make this work:
+
+```xml
+<property>
+  <name>zeppelin.notebook.dir</name>
+  <value>${git clone dir of rdbms-to-hdfs}/notebooks/</value>
+  <description>path or URI for notebook persist</description>
+</property>
+```
+
+Inside the notebook some specific spark interperter settings are mentioned.
+this mainly consists of adding the needed dependencies for making the jdbc connection.
+
+Since we use mysql we use the mysql:mysql-connector-java:6.0.3
+
+```

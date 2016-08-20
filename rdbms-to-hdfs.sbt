@@ -40,15 +40,17 @@ libraryDependencies ++= Seq(
  
 mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
   {
-//    case PathList("javax", "servlet", xs @ _*) => MergeStrategy.last
+    case PathList("javax", "servlet", xs @ _*) => MergeStrategy.last
 //    case PathList("javax", "activation", xs @ _*) => MergeStrategy.last
-//    case PathList("javax", "el", xs @ _*) => MergeStrategy.last
+    case PathList("org", "joda", "time", xs @ _*) => MergeStrategy.last
+    case PathList("parquet", xs @ _*) => MergeStrategy.last
+    case PathList("javax", "xml", xs @ _*) => MergeStrategy.last
     case PathList("org", "apache", xs @ _*) => MergeStrategy.last
     case PathList("com", "esotericsoftware", xs @ _*) => MergeStrategy.last
     case PathList("com", "google", xs @ _*) => MergeStrategy.last
-//  case PathList("io", "netty", xs @ _*) => MergeStrategy.last
-//    case PathList("org", "objectweb", "asm", xs @ _*) => MergeStrategy.last
-//    case PathList("org", "bouncycastle", xs @ _*) => MergeStrategy.last
+  case PathList("au", "com", "bytecode", xs @ _*) => MergeStrategy.last
+    case PathList("org", "codehaus", "jackson", xs @ _*) => MergeStrategy.last
+    case PathList("jodd", xs @ _*) => MergeStrategy.last
 //    case PathList("org", "slf4j", xs @ _*) => MergeStrategy.last
 //    case PathList("org", "eclipse", "aether", "META-INF/sisu/javax.inject.Named") => MergeStrategy.last
 //    case PathList("com", "healthmarketscience", "jackcess", "log4j.properties") => MergeStrategy.discard
@@ -58,6 +60,8 @@ mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
 //    case "sbt/sbt.autoplugins" => MergeStrategy.rename
 //    case "about.html" => MergeStrategy.rename
 //    case "plugin.properties" => MergeStrategy.rename
+    case "overview.html" => MergeStrategy.rename
+    case "plugin.xml" => MergeStrategy.rename
 //    case "reference.conf" => MergeStrategy.first
     case x => old(x)
   }

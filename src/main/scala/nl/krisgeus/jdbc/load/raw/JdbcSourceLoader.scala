@@ -8,22 +8,26 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 
 object JdbcSourceLoader {
-  val jdbcUrl = Settings().jdbcUrl
-  val driver = Settings().dbDriver
 
   def main(args: Array[String]): Unit = {
     val now = LocalDateTime.now()
+
+    val database = args(0)
+    val settings = Settings(database)
+
+    val jdbcUrl = settings.jdbcUrl
+    val driver = settings.dbDriver
 
     val conf = new SparkConf().setAppName("Jdbc Source Loader")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
 
-    Settings().tableConfigs.foreach { table =>
+    settings.tableConfigs.foreach { table =>
       val name = table.getString("name")
       val incremental = table.getBoolean("incremental")
       val primarykeyColumns = table.getStringList("primarykey")
 
-      val tableDF: DataFrame = getTableAsDataframe(sqlContext, name)
+      val tableDF: DataFrame = getTableAsDataframe(sqlContext, name, jdbcUrl, driver)
 
       tableDF.write.parquet(getOutputPath(now, name))
 
@@ -34,7 +38,7 @@ object JdbcSourceLoader {
     f"/tmp/sourcedb/${name}/${now.getYear}/${now.getMonthValue}%02d/${now.getDayOfMonth}%02d/"
   }
 
-  def getTableAsDataframe(sqlContext: SQLContext, tablename: String): DataFrame = {
+  def getTableAsDataframe(sqlContext: SQLContext, tablename: String, jdbcUrl: String, driver: String): DataFrame = {
     sqlContext.read.format("jdbc").options(Map("url"->jdbcUrl, "dbtable"->s"${getLoadQuery(tablename)}", "driver"->driver)).load()
   }
 

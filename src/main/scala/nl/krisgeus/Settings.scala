@@ -20,5 +20,5 @@ class Settings(config: Config) {
 }
 
 object Settings {
-  def apply(): Settings = new Settings(ConfigFactory.load())
+  def apply(name: String): Settings = new Settings(ConfigFactory.load(name))
 }

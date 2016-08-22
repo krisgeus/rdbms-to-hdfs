@@ -27,6 +27,8 @@ libraryDependencies ++= Seq(
     ExclusionRule(organization = "javax.servlet")
     ),
   "com.typesafe" % "config" % "1.2.1",
+  "mysql" % "mysql-connector-java" % "6.0.3",
+  "com.github.scopt" %% "scopt" % "3.5.0",
   "com.holdenkarau" %% "spark-testing-base" % sparkTestingVersion % Test excludeAll(
     ExclusionRule(organization = "org.apache.hadoop"),
     ExclusionRule(organization = "org.xerial.snappy", name="snappy-java"),
@@ -35,7 +37,6 @@ libraryDependencies ++= Seq(
   "org.apache.hadoop" % "hadoop-minicluster" % hadoopVersion % Test excludeAll(
     ExclusionRule(organization = "javax.servlet")
   ),
-  "mysql" % "mysql-connector-java" % "6.0.3",
   "org.xerial.snappy" % "snappy-java" % "1.0.5" % Test
 )
  

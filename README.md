@@ -84,4 +84,8 @@ Since we use mysql we use the mysql:mysql-connector-java:6.0.3
 ## Running the steps
 
 ### Step1a Full load of tables to parquet files on HDFS
-spark-submit --class nl.krisgeus.jdbc.load.raw.JdbcSourceLoader target/scala-2.10/rdbms-to-hdfs-assembly-0.1-SNAPSHOT.jar
+spark-submit --class nl.krisgeus.jdbc.JdbcMain target/scala-2.10/rdbms-to-hdfs-assembly-0.1-SNAPSHOT.jar -s 0 -c employees -o /tmp/sourcedb
+
+or
+
+spark-submit --class nl.krisgeus.jdbc.JdbcMain target/scala-2.10/rdbms-to-hdfs-assembly-0.1-SNAPSHOT.jar --step 0 --config employees --output /tmp/sourcedb
